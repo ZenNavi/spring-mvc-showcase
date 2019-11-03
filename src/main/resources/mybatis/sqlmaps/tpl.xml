@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.myapp.book">
+    <select id="getTplList" resultType="java.util.HashMap">
+SELECT a.pjt_no PJT_NO, a.grp_cd GRP_CD, a.tpl_cd TPL_CO, b.tpl_cd TPL_CONT, c.tpl_cd TPL_CONS, d.tpl_cd TPL_P, CASE WHEN d.pjt_no IS NULL THEN 'NON_ITM' ELSE 'USE_ITM' END PJT_TYPE
+  FROM (SELECT * FROM pjt_tpl_mast WHERE grp_cd = 'TPL_CO') a
+  LEFT JOIN pjt_tpl_mast b ON a.pjt_no = b.pjt_no AND b.grp_cd = 'TPL_CONT'
+  LEFT JOIN pjt_tpl_mast c ON a.pjt_no = c.pjt_no AND c.grp_cd = 'TPL_CONS'
+  LEFT JOIN pjt_tpl_mast d ON a.pjt_no = d.pjt_no AND d.grp_cd = 'TPL_P'
+    </select>
+</mapper>

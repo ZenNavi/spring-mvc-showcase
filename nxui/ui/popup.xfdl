@@ -1,0 +1,383 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="popup" width="640" height="400" titletext="New Form" onload="popup_onload">
+    <Layouts>
+      <Layout height="400" mobileorientation="landscape" width="640" stepcount="1">
+        <Grid id="grdPjtType" taborder="0" left="10" top="10" height="150" autosizebandtype="body" autosizingtype="none" autofittype="col" minwidth="620" maxwidth="620" binddataset="dsPjtTpl" right="10" oncellclick="grdPjtType_oncellclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="PJT_NO"/>
+                <Cell col="1" text="TPL_A"/>
+                <Cell col="2" text="TPL_B"/>
+                <Cell col="3" text="TPL_C"/>
+                <Cell col="4" text="TPL_D"/>
+                <Cell col="5" text="PJT_TYPE"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:PJT_NO"/>
+                <Cell col="1" text="bind:TPL_A" edittype="text"/>
+                <Cell col="2" text="bind:TPL_B" edittype="text"/>
+                <Cell col="3" text="bind:TPL_C" edittype="text"/>
+                <Cell col="4" text="bind:TPL_D" edittype="text"/>
+                <Cell col="5" text="bind:PJT_TYPE"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Div id="divTemplateFormHeader" taborder="1" left="10" top="grdPjtType:10" height="30" cssclass="box-top" text="" right="10">
+          <Layouts>
+            <Layout>
+              <Static id="Static00" taborder="0" text="프로젝트유형" left="0" top="0" width="180" height="30" cssclass="form_header"/>
+              <Radio id="PJT_TYPE" taborder="1" left="Static00:10" top="4" width="300" height="22" innerdataset="dsProjectType" codecolumn="OPT_CD" datacolumn="OPT_NM" direction="vertical" fittocontents="width" onitemchanged="divTemplateFormHeader_PJT_TYPE_onitemchanged" text="내역관리 대상아님" index="1"/>
+            </Layout>
+            <Layout name="popup"/>
+          </Layouts>
+          <InitValue>
+            <Radio id="PJT_TYPE" innerdataset="dsTemplate.filter(USE_P=='Y')" codecolumn="OPT_CD" datacolumn="OPT_NM"/>
+          </InitValue>
+        </Div>
+        <Div id="divTemplateFormCommon" taborder="2" left="10" top="divTemplateFormHeader:0" height="90" cssclass="box-body" visible="false" right="10">
+          <Layouts>
+            <Layout>
+              <Static id="Static04" taborder="6" text="도실하" left="0" top="0" width="60" height="60" cssclass="form_header"/>
+              <Static id="Static00" taborder="0" text="기자재" left="Static04:0" top="0" width="120" height="30" cssclass="form_header"/>
+              <Static id="Static01" taborder="1" text="도급계약" left="0" top="Static04:0" width="180" height="30" cssclass="form_header"/>
+              <Radio id="TPL_P" taborder="2" left="Static00:10" top="4" height="22" innerdataset="ds4Template" codecolumn="OPT_CD" datacolumn="OPT_NM" direction="vertical" fittocontents="width" width="300" onitemchanged="divTemplateForm_TPL_onitemchanged"/>
+              <Static id="Static03" taborder="3" text="공사비/기타외주" left="Static04:0" top="Static00:0" width="120" height="30" cssclass="form_header"/>
+              <Radio id="TPL_CONS" taborder="4" left="Static03:10" top="34" width="300" height="22" innerdataset="ds4Template" codecolumn="OPT_CD" datacolumn="OPT_NM" direction="vertical" fittocontents="width" onitemchanged="divTemplateForm_TPL_onitemchanged"/>
+              <Radio id="TPL_CONT" taborder="5" left="Static01:10" top="64" width="300" height="22" innerdataset="ds3Template" codecolumn="OPT_CD" datacolumn="OPT_NM" direction="vertical" fittocontents="width" onitemchanged="divTemplateForm_TPL_onitemchanged"/>
+            </Layout>
+            <Layout name="popup"/>
+          </Layouts>
+          <InitValue>
+            <Radio id="TPL_P" innerdataset="dsTemplate.filter(USE_P=='Y')" codecolumn="OPT_CD" datacolumn="OPT_NM"/>
+            <Radio id="TPL_CONS" innerdataset="dsTemplate.filter(USE_C == 'Y')" codecolumn="OPT_CD" datacolumn="OPT_NM"/>
+            <Radio id="TPL_CONT" codecolumn="OPT_CD" datacolumn="OPT_NM" innerdataset="dsTemplate.filter(USE_S==&quot;Y&quot;)"/>
+          </InitValue>
+        </Div>
+        <Button id="btnSave" taborder="4" text="저장" left="229" top="330" width="182" height="32" onclick="btnSave_onclick"/>
+        <Div id="divTemplateFormCO" taborder="3" left="10" top="divTemplateFormCommon:0" height="30" cssclass="box-bottom" visible="false" right="10">
+          <Layouts>
+            <Layout>
+              <Static id="Static02" taborder="0" text="작업지시서" left="0" top="0" width="180" height="30" cssclass="form_header"/>
+              <Radio id="TPL_CO" taborder="1" left="Static02:10" top="4" width="300" height="22" innerdataset="ds3Template" codecolumn="OPT_CD" datacolumn="OPT_NM" direction="vertical" fittocontents="width" onitemchanged="divTemplateForm_TPL_onitemchanged">
+                <Dataset id="innerdataset">
+                  <ColumnInfo>
+                    <Column id="codecolumn" size="256"/>
+                    <Column id="datacolumn" size="256"/>
+                  </ColumnInfo>
+                  <Rows>
+                    <Row>
+                      <Col id="codecolumn">A</Col>
+                      <Col id="datacolumn">KRW</Col>
+                    </Row>
+                    <Row>
+                      <Col id="datacolumn">MULTI</Col>
+                      <Col id="codecolumn">B</Col>
+                    </Row>
+                  </Rows>
+                </Dataset>
+              </Radio>
+            </Layout>
+            <Layout name="popup"/>
+          </Layouts>
+          <InitValue>
+            <Radio id="TPL_CO" innerdataset="dsTemplate.filter(USE_W==&quot;Y&quot;)"/>
+          </InitValue>
+        </Div>
+      </Layout>
+      <Layout height="640" mobileorientation="landscape" name="popup" width="480"/>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[
+this.popup_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.fnLoadData();
+	this.fnSetPrtType();
+};
+
+this.fnSetPrtType = function(){
+	selRowIdx = this.grdPjtType.getSelectedRows();
+ 	this.divTemplateFormHeader.form.PJT_TYPE.set_value(this.dsPjtTpl.getColumn(selRowIdx, "PJT_TYPE"));
+ 	this.divTemplateFormCommon.form.TPL_P.set_value(this.dsPjtTpl.getColumn(selRowIdx, "TPL_A"));
+ 	this.divTemplateFormCommon.form.TPL_CONS.set_value(this.dsPjtTpl.getColumn(selRowIdx, "TPL_B"));
+ 	this.divTemplateFormCommon.form.TPL_CONT.set_value(this.dsPjtTpl.getColumn(selRowIdx, "TPL_C"));
+ 	this.divTemplateFormCO.form.TPL_CO.set_value(this.dsPjtTpl.getColumn(selRowIdx, "TPL_D"));
+	
+	this.fnPjtTypeToggle();
+};
+
+this.fnPjtTypeToggle = function(){
+
+	pjtType = this.divTemplateFormHeader.form.PJT_TYPE.value;
+	
+	if( pjtType == "USE_ITM" ) {	
+		this.divTemplateFormCommon.set_height(90);
+		this.divTemplateFormCommon.set_visible(true);
+		this.divTemplateFormCO.set_visible(true);
+		this.divTemplateFormCO.set_top("divTemplateFormHeader:90");
+	} else {	
+		this.divTemplateFormCommon.set_height(0);
+		this.divTemplateFormCommon.set_visible(false);
+		this.divTemplateFormCO.set_visible(true);
+		this.divTemplateFormCO.set_top("divTemplateFormHeader:0");
+	}
+	
+};
+
+this.divTemplateFormHeader_PJT_TYPE_onitemchanged = function(obj:nexacro.Radio,e:nexacro.ItemChangeEventInfo)
+{
+	selRowIdx = this.grdPjtType.getSelectedRows();
+	pjtType = this.divTemplateFormHeader.form.PJT_TYPE.value;
+	
+	this.dsPjtTpl.setColumn(selRowIdx, "PJT_TYPE", pjtType);
+	this.fnPjtTypeToggle();
+};
+
+this.divTemplateForm_TPL_onitemchanged = function(obj:nexacro.Radio,e:nexacro.ItemChangeEventInfo)
+{
+	strNm     = obj.name;
+	strVal    = obj.value;
+	prtType   = this.divTemplateFormHeader.form.PJT_TYPE.value;
+	
+	selRowIdx = this.grdPjtType.getSelectedRows();
+	
+	if( strNm == "TPL_CONS" || strNm == "TPL_CO" ) {
+		this.divTemplateFormCO.form.TPL_CO.set_value(strVal);
+		this.divTemplateFormCommon.form.TPL_CONS.set_value(strVal);
+	}
+
+	if( strVal == "D" ) {
+		this.divTemplateFormCommon.form.TPL_P.set_value(strVal);
+		this.divTemplateFormCommon.form.TPL_CONS.set_value(strVal);
+		this.divTemplateFormCommon.form.TPL_CONT.set_value(strVal);
+		this.divTemplateFormCO.form.TPL_CO.set_value(strVal);
+	} else if ( strVal == "C" ) {
+		this.divTemplateFormCommon.form.TPL_P.set_value(strVal);
+		this.divTemplateFormCommon.form.TPL_CONS.set_value(strVal);
+		this.divTemplateFormCommon.form.TPL_CONT.set_value("A");
+		this.divTemplateFormCO.form.TPL_CO.set_value("A");
+	} else if ( strVal == "B" || strVal == "A" ) {
+		if( this.divTemplateFormCommon.form.TPL_CONT.value == "D" || this.divTemplateFormCommon.form.TPL_CONT.value == "C" ) {
+			this.divTemplateFormCommon.form.TPL_CONT.set_value(strVal);
+		}
+		if( this.divTemplateFormCO.form.TPL_CO.value == "D" || this.divTemplateFormCO.form.TPL_CO.value == "C" ) {
+			this.divTemplateFormCO.form.TPL_CO.set_value(strVal);
+		}
+		if( this.divTemplateFormCommon.form.TPL_CONS.value == "D" || this.divTemplateFormCommon.form.TPL_CONS.value == "C" ) {
+			this.divTemplateFormCommon.form.TPL_CONS.set_value(strVal);
+		}
+		if( this.divTemplateFormCommon.form.TPL_P.value == "D" || this.divTemplateFormCommon.form.TPL_P.value == "C" ) {
+			this.divTemplateFormCommon.form.TPL_P.set_value(strVal);
+		}
+	}
+	
+	tplA = this.divTemplateFormCommon.form.TPL_P.value;
+	tplB = this.divTemplateFormCommon.form.TPL_CONS.value;
+	tplC = this.divTemplateFormCommon.form.TPL_CONT.value;
+	tplD = this.divTemplateFormCO.form.TPL_CO.value;
+
+	this.dsPjtTpl.setColumn(selRowIdx, "TPL_A", tplA);
+	this.dsPjtTpl.setColumn(selRowIdx, "TPL_B", tplB);
+	this.dsPjtTpl.setColumn(selRowIdx, "TPL_C", tplC);
+	this.dsPjtTpl.setColumn(selRowIdx, "TPL_D", tplD);
+
+};
+
+this.grdPjtType_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+
+	selRowIdx = this.grdPjtType.getSelectedRows();
+	pjtType   = this.dsPjtTpl.getColumn(selRowIdx, "PJT_TYPE");
+	this.divTemplateFormHeader.form.PJT_TYPE.set_value(pjtType);
+	
+	this.fnSetPrtType();
+};
+
+this.fnCallback = function(svcId, errCd, errMsg) {
+	console.log( arguments );
+	switch(svcId){
+		case "TplListSvc":
+		break;
+		case "TplSaveSvc":
+		break;
+	}
+	this.alert(errMsg);
+};
+
+this.fnLoadData = function(){
+	this.tran
+	this.transaction("TplListSvc", "SvcUrl::tpl/list", "", "dsPjtTpl=dsPjtTpl", "", "fnCallback");
+};
+
+this.btnSave_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.transaction("TplSaveSvc", "SvcUrl::tpl/save","","dsPjtTpl=dsPjtTpl","","fnCallback");
+};
+]]></Script>
+    <Objects>
+      <Dataset id="ds4Template">
+        <ColumnInfo>
+          <Column id="OPT_CD" type="STRING" size="256"/>
+          <Column id="OPT_NM" type="STRING" size="256"/>
+          <Column id="USE_P" type="STRING" size="256"/>
+          <Column id="USE_C" type="STRING" size="256"/>
+          <Column id="USE_S" type="STRING" size="256"/>
+          <Column id="USE_W" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="OPT_CD">A</Col>
+            <Col id="OPT_NM">A Type</Col>
+            <Col id="USE_P">Y</Col>
+            <Col id="USE_C">Y</Col>
+            <Col id="USE_S">Y</Col>
+            <Col id="USE_W">Y</Col>
+          </Row>
+          <Row>
+            <Col id="OPT_CD">B</Col>
+            <Col id="OPT_NM">B Type</Col>
+            <Col id="USE_P">Y</Col>
+            <Col id="USE_C">Y</Col>
+            <Col id="USE_S">Y</Col>
+            <Col id="USE_W">Y</Col>
+          </Row>
+          <Row>
+            <Col id="OPT_CD">C</Col>
+            <Col id="OPT_NM">C Type</Col>
+            <Col id="USE_P">Y</Col>
+            <Col id="USE_C">Y</Col>
+            <Col id="USE_S">N</Col>
+            <Col id="USE_W">N</Col>
+          </Row>
+          <Row>
+            <Col id="OPT_CD">D</Col>
+            <Col id="OPT_NM">D Type</Col>
+            <Col id="USE_P">Y</Col>
+            <Col id="USE_C">Y</Col>
+            <Col id="USE_S">Y</Col>
+            <Col id="USE_W">Y</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsProjectType">
+        <ColumnInfo>
+          <Column id="OPT_CD" type="STRING" size="256"/>
+          <Column id="OPT_NM" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="OPT_CD">USE_ITM</Col>
+            <Col id="OPT_NM">내역관리 프로젝트</Col>
+          </Row>
+          <Row>
+            <Col id="OPT_CD">NON_ITM</Col>
+            <Col id="OPT_NM">내역관리 대상아님</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsPjtTpl">
+        <ColumnInfo>
+          <ConstColumn id="SEL_ROW_IDX" type="INT" size="256" value="0"/>
+          <Column id="PJT_NO" type="STRING" size="256"/>
+          <Column id="TPL_A" type="STRING" size="256"/>
+          <Column id="TPL_B" type="STRING" size="256"/>
+          <Column id="TPL_C" type="STRING" size="256"/>
+          <Column id="TPL_D" type="STRING" size="256"/>
+          <Column id="PJT_TYPE" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="PJT_NO">SE2828</Col>
+            <Col id="TPL_A">A</Col>
+            <Col id="TPL_B">A</Col>
+            <Col id="TPL_C">A</Col>
+            <Col id="TPL_D">A</Col>
+            <Col id="PJT_TYPE">USE_ITM</Col>
+          </Row>
+          <Row>
+            <Col id="PJT_NO">SE6266</Col>
+            <Col id="PJT_TYPE">NON_ITM</Col>
+            <Col id="TPL_A"/>
+            <Col id="TPL_B"/>
+            <Col id="TPL_D">A</Col>
+            <Col id="TPL_C"/>
+          </Row>
+          <Row>
+            <Col id="PJT_NO">SE6854</Col>
+            <Col id="PJT_TYPE">USE_ITM</Col>
+            <Col id="TPL_A">A</Col>
+            <Col id="TPL_B">B</Col>
+            <Col id="TPL_D">B</Col>
+            <Col id="TPL_C">A</Col>
+          </Row>
+          <Row>
+            <Col id="PJT_NO">SE2323</Col>
+            <Col id="PJT_TYPE">NON_ITM</Col>
+            <Col id="TPL_A"/>
+            <Col id="TPL_B"/>
+            <Col id="TPL_C"/>
+            <Col id="TPL_D">A</Col>
+          </Row>
+          <Row>
+            <Col id="TPL_A">D</Col>
+            <Col id="TPL_B">D</Col>
+            <Col id="TPL_C">D</Col>
+            <Col id="TPL_D">D</Col>
+            <Col id="PJT_TYPE">USE_ITM</Col>
+            <Col id="PJT_NO">SE7889</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds3Template">
+        <ColumnInfo>
+          <Column id="OPT_CD" type="STRING" size="256"/>
+          <Column id="OPT_NM" type="STRING" size="256"/>
+          <Column id="USE_P" type="STRING" size="256"/>
+          <Column id="USE_C" type="STRING" size="256"/>
+          <Column id="USE_S" type="STRING" size="256"/>
+          <Column id="USE_W" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="OPT_CD">A</Col>
+            <Col id="OPT_NM">A Type</Col>
+            <Col id="USE_P">Y</Col>
+            <Col id="USE_C">Y</Col>
+            <Col id="USE_S">Y</Col>
+            <Col id="USE_W">Y</Col>
+          </Row>
+          <Row>
+            <Col id="OPT_CD">B</Col>
+            <Col id="OPT_NM">B Type</Col>
+            <Col id="USE_P">Y</Col>
+            <Col id="USE_C">Y</Col>
+            <Col id="USE_S">Y</Col>
+            <Col id="USE_W">Y</Col>
+          </Row>
+          <Row>
+            <Col id="OPT_CD">D</Col>
+            <Col id="OPT_NM">D Type</Col>
+            <Col id="USE_P">Y</Col>
+            <Col id="USE_C">Y</Col>
+            <Col id="USE_S">Y</Col>
+            <Col id="USE_W">Y</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <InitValue/>
+  </Form>
+</FDL>

@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="Form_Work" width="1080" height="570" titletext="Form_Work">
+    <Layouts>
+      <Layout width="1080" height="570" screenid="Desktop_screen">
+        <Div id="Div00" taborder="0" text="Div00" left="-2" top="-2" width="1084" height="572" url="ui::popup.xfdl"/>
+      </Layout>
+    </Layouts>
+  </Form>
+</FDL>
